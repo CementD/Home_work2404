@@ -1,4 +1,4 @@
-template <typename T>
+template <class T>
 class Array {
 private:
     T* data;
@@ -17,22 +17,22 @@ public:
     void SetSize(int newSize, int newGrow = 1);
 };
 
-template <typename T>
+template <class T>
 Array<T>::Array(int initialCapacity, int grow) : size(0), capacity(initialCapacity), grow(grow) {
     data = new T[capacity];
 }
 
-template <typename T>
+template <class T>
 Array<T>::~Array() {
     delete[] data;
 }
 
-template <typename T>
+template <class T>
 T& Array<T>::operator[](int index) {
     return data[index];
 }
 
-template <typename T>
+template <class T>
 void Array<T>::Add(const T& item) {
     if (size >= capacity) {
         resize(capacity + grow);
@@ -40,12 +40,12 @@ void Array<T>::Add(const T& item) {
     data[size++] = item;
 }
 
-template <typename T>
+template <class T>
 int Array<T>::GetSize() const {
     return size;
 }
 
-template <typename T>
+template <class T>
 void Array<T>::SetSize(int newSize, int newGrow) {
     if (newSize > capacity) {
         resize(newSize);
@@ -53,7 +53,7 @@ void Array<T>::SetSize(int newSize, int newGrow) {
     grow = newGrow;
 }
 
-template <typename T>
+template <class T>
 void Array<T>::resize(int newSize) {
     T* newData = new T[newSize];
     for (int i = 0; i < size; i++) {
