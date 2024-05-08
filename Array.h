@@ -19,7 +19,7 @@ public:
 
 template <class T>
 Array<T>::Array(int initialCapacity, int grow) : size(0), capacity(initialCapacity), grow(grow) {
-    data = new T[capacity];
+    data = new T[capacity]();
 }
 
 template <class T>
@@ -48,10 +48,15 @@ int Array<T>::GetSize() const {
 template <class T>
 void Array<T>::SetSize(int newSize, int newGrow) {
     if (newSize > capacity) {
-        resize(newSize);
+        int newCapacity = newSize + newGrow - (newSize % newGrow);
+        resize(newCapacity);
+        grow = newGrow;
     }
-    grow = newGrow;
+    else {
+        size = newSize;
+    }
 }
+
 
 template <class T>
 void Array<T>::resize(int newSize) {
